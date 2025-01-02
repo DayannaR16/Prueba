@@ -167,6 +167,11 @@
             const randomY = Math.random() * 100 - 50;
             noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
         });
+
+        // Hacer que al hacer clic en "Salir", el mensaje de "Ya somos novios mi amor" aparezca
+        finalMessage.addEventListener('click', function() {
+            finalMessage.style.display = 'none'; // Ocultar el mensaje actual
+        });
     </script>
 </body>
 </html>
