@@ -79,7 +79,7 @@
             cursor: pointer;
         }
         #yes {
-            background-color: #28a745;
+            background-color: #02c0a7;
             color: white;
         }
         #yes:hover {
@@ -93,8 +93,8 @@
             display: none;
             text-align: center;
             font-size: 2em;
-            color: white;
-            background-color: #28a745;
+            color: rgb(250, 6, 6);
+            background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
             position: absolute;
@@ -148,6 +148,14 @@
             const randomY = Math.random() * 100 - 50;
             noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
         });
+
+        // Configurar comportamiento del botón "Sí"
+        document.getElementById("yes").addEventListener("click", function() {
+            alert("Ya somos novios mi amor 💖");
+        });
     </script>
 </body>
 </html>
+
+
+
