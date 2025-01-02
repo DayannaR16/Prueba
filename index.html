@@ -173,9 +173,13 @@
             questionContainer.style.display = 'none'; // Ocultar la pregunta
         });
 
-        // Prevenir que el usuario haga clic en "No"
+        // Prevenir que el usuario haga clic en "No" y moverlo
         noButton.addEventListener('click', function(event) {
             event.preventDefault(); // Evitar que haga clic en "No"
+            // Mover el botón aleatoriamente
+            const randomX = Math.random() * 200 - 100;
+            const randomY = Math.random() * 100 - 50;
+            noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
         });
     </script>
 </body>
