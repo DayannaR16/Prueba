@@ -15,9 +15,6 @@
             justify-content: center;
             align-items: center;
         }
-        .hidden {
-            display: none;
-        }
         .center {
             text-align: center;
         }
@@ -64,25 +61,8 @@
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
             position: relative;
         }
-        .question-container:before {
-            content: "❤️❤️❤️";
-            font-size: 1.5em;
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .question-container:after {
-            content: "❤️❤️❤️";
-            font-size: 1.5em;
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        h1 {
+        .question-container h1 {
             font-size: 2.5em;
-            margin: 20px 0;
             color: black;
         }
         .buttons {
@@ -97,7 +77,6 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.2s, background-color 0.3s;
         }
         #yes {
             background-color: #28a745;
@@ -109,11 +88,6 @@
         #no {
             background-color: #dc3545;
             color: white;
-            position: relative;
-        }
-        #no:hover {
-            left: calc(50px - 50%);
-            transform: translateX(50px);
         }
         #message {
             display: none;
@@ -139,43 +113,34 @@
         <h1>¿Quieres ser mi novio?</h1>
         <div class="buttons">
             <button id="yes">Sí</button>
-            <button id="no" id="no-button">No</button>
+            <button id="no">No</button>
         </div>
     </div>
 
     <div id="message">¡Sabía que dirías que sí! 💖</div>
 
     <script>
+        // Obtener elementos del DOM
         const introScreen = document.getElementById('intro-screen');
         const questionContainer = document.getElementById('question-container');
         const heart = document.getElementById('heart');
-        const noButton = document.getElementById('no-button');
+        const noButton = document.getElementById('no');
         const yesButton = document.getElementById('yes');
         const message = document.getElementById('message');
 
-        // Al hacer clic en el corazón, muestra la pregunta
+        // Al hacer clic en el corazón, mostrar la pregunta
         heart.addEventListener('click', function() {
             introScreen.style.display = 'none'; // Ocultar la pantalla inicial
             questionContainer.style.display = 'block'; // Mostrar la pregunta
         });
 
-        // Hacer que el botón "No" se aleje cuando el cursor pase por encima
-        noButton.addEventListener('mouseover', function() {
-            // Movimiento aleatorio para alejar el botón
-            const randomX = Math.random() * 200 - 100; // Posición horizontal aleatoria
-            const randomY = Math.random() * 100 - 50;  // Posición vertical aleatoria
-            noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
-        });
-
-        // Mostrar el mensaje cuando el usuario da clic en "Sí"
+        // Al hacer clic en "Sí", mostrar el mensaje y ocultar la pregunta
         yesButton.addEventListener('click', function() {
-            // Mostrar el mensaje de aceptación
-            message.style.display = 'block';
-            // Ocultar la pregunta
-            questionContainer.style.display = 'none';
+            message.style.display = 'block'; // Mostrar el mensaje
+            questionContainer.style.display = 'none'; // Ocultar la pregunta
         });
 
-        // Prevenir que el usuario haga clic en "No" y moverlo
+        // Prevenir que el usuario haga clic en "No" y mover el botón
         noButton.addEventListener('click', function(event) {
             event.preventDefault(); // Evitar que haga clic en "No"
             // Mover el botón aleatoriamente
