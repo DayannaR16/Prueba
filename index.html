@@ -101,6 +101,18 @@
             top: 50%;
             transform: translateY(-50%);
         }
+        #final-message {
+            display: none;
+            text-align: center;
+            font-size: 2.5em;
+            color: #28a745;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            position: absolute;
+            top: 60%;
+            transform: translateY(-50%);
+        }
     </style>
 </head>
 <body>
@@ -109,7 +121,7 @@
         <div class="heart" id="heart">❤️</div>
         <div class="instruction">(Toca el corazón)</div>
     </div>
-    <div class="question-container hidden" id="question-container">
+    <div class="question-container" id="question-container">
         <h1>¿Quieres ser mi novio?</h1>
         <div class="buttons">
             <button id="yes">Sí</button>
@@ -117,7 +129,8 @@
         </div>
     </div>
 
-    <div id="message">¡Ya somos novios mi amor! ❤️</div>
+    <div id="message">¡Sabía que dirías que sí! 💖</div>
+    <div id="final-message">¡Ya somos novios mi amor! ❤️</div>
 
     <script>
         // Obtener elementos del DOM
@@ -127,6 +140,7 @@
         const noButton = document.getElementById('no');
         const yesButton = document.getElementById('yes');
         const message = document.getElementById('message');
+        const finalMessage = document.getElementById('final-message');
 
         // Al hacer clic en el corazón, mostrar la pregunta
         heart.addEventListener('click', function() {
@@ -134,10 +148,15 @@
             questionContainer.style.display = 'block'; // Mostrar la pregunta
         });
 
-        // Al hacer clic en "Sí", mostrar el mensaje y ocultar la pregunta
+        // Al hacer clic en "Sí", mostrar el mensaje de que dirías que sí y luego el mensaje de novios
         yesButton.addEventListener('click', function() {
-            message.style.display = 'block'; // Mostrar el mensaje
+            message.style.display = 'block'; // Mostrar el primer mensaje
             questionContainer.style.display = 'none'; // Ocultar la pregunta
+
+            setTimeout(function() {
+                message.style.display = 'none'; // Ocultar el primer mensaje
+                finalMessage.style.display = 'block'; // Mostrar el segundo mensaje
+            }, 3000); // Esperar 3 segundos antes de mostrar "Ya somos novios mi amor"
         });
 
         // Prevenir que el usuario haga clic en "No" y mover el botón
@@ -148,14 +167,6 @@
             const randomY = Math.random() * 100 - 50;
             noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
         });
-
-        // Configurar comportamiento del botón "Sí"
-        document.getElementById("yes").addEventListener("click", function() {
-            alert(" Sabía que dirías que sí💖");
-        });
     </script>
 </body>
 </html>
-
-
-
