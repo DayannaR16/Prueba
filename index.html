@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Quieres ser mi novio?</title>
+    <title>Para ti mi amor</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: #87CEEB; /* Fondo azul */
+            background: #FF0000; /* Fondo rojo */
             margin: 0;
             height: 100vh;
             overflow: hidden;
@@ -21,11 +21,29 @@
         .center {
             text-align: center;
         }
+        .card {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+        }
         .heart {
             font-size: 3em;
             color: red;
             cursor: pointer;
             animation: pulse 1.5s infinite;
+        }
+        .instruction {
+            position: absolute;
+            top: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8em;
+            color: white;
+            font-weight: bold;
+            margin-top: 10px;
         }
         @keyframes pulse {
             0%, 100% {
@@ -38,12 +56,34 @@
         .question-container {
             display: none;
             text-align: center;
-            animation: fadeIn 2s ease;
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        .question-container:before {
+            content: "❤️❤️❤️";
+            font-size: 1.5em;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .question-container:after {
+            content: "❤️❤️❤️";
+            font-size: 1.5em;
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
         }
         h1 {
             font-size: 2.5em;
             margin: 20px 0;
-            color: #ff5e78;
+            color: black;
         }
         .buttons {
             margin-top: 20px;
@@ -69,56 +109,55 @@
         #no {
             background-color: #dc3545;
             color: white;
+            position: relative;
         }
         #no:hover {
-            background-color: #c82333;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            left: calc(50px - 50%);
+            transform: translateX(50px);
         }
     </style>
 </head>
 <body>
-    <div id="intro-screen" class="center">
+    <div id="intro-screen" class="center card">
         <h1>Quiero preguntarte algo...</h1>
         <div class="heart" id="heart">❤️</div>
+        <div class="instruction">(Toca el corazón)</div>
     </div>
     <div class="question-container hidden" id="question-container">
         <h1>¿Quieres ser mi novio?</h1>
         <div class="buttons">
             <button id="yes">Sí</button>
-            <button id="no">No</button>
+            <button id="no" id="no-button">No</button>
         </div>
     </div>
+
     <script>
         const introScreen = document.getElementById('intro-screen');
         const questionContainer = document.getElementById('question-container');
         const heart = document.getElementById('heart');
-        const noButton = document.getElementById('no');
+        const noButton = document.getElementById('no-button');
 
         // Al hacer clic en el corazón, muestra la pregunta
-        heart.addEventListener('click', () => {
-            introScreen.classList.add('hidden');
-            questionContainer.classList.remove('hidden');
+        heart.addEventListener('click', function() {
+            introScreen.style.display = 'none'; // Ocultar la pantalla inicial
+            questionContainer.style.display = 'block'; // Mostrar la pregunta
         });
 
         // Configurar comportamiento del botón "No"
-        noButton.addEventListener('click', () => {
-            let confirmation = false;
-            while (!confirmation) {
-                confirmation = confirm("¿Estás seguro?");
-            }
+        noButton.addEventListener('click', function() {
+            alert("¿Estás seguro? 🙄"); // Mostrar alerta si se presiona "No"
+        });
+
+        // Hacer que el botón "No" se aleje cuando el cursor pase por encima
+        noButton.addEventListener('mouseover', function() {
+            // Movimiento aleatorio para alejar el botón
+            const randomX = Math.random() * 200 - 100; // Posición horizontal aleatoria
+            const randomY = Math.random() * 100 - 50;  // Posición vertical aleatoria
+            noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
         });
 
         // Configurar comportamiento del botón "Sí"
-        document.getElementById("yes").addEventListener("click", () => {
+        document.getElementById("yes").addEventListener("click", function() {
             alert("Sabía que dirías que si mi amor 💖");
         });
     </script>
