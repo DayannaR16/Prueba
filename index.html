@@ -105,12 +105,36 @@
             display: none;
             text-align: center;
             font-size: 2.5em;
-            color: #000000; /* Letra roja */
+            color: #fd0707; /* Letra roja */
             background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
             position: absolute;
-            top: 60%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        #countdown {
+            display: none;
+            text-align: center;
+            font-size: 2.5em;
+            color: #000;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            position: absolute;
+            top: 70%;
+            transform: translateY(-50%);
+        }
+        #final-words {
+            display: none;
+            text-align: center;
+            font-size: 2.5em;
+            color: #ff0000; /* Letra roja */
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            position: absolute;
+            top: 80%;
             transform: translateY(-50%);
         }
     </style>
@@ -131,6 +155,8 @@
 
     <div id="message">¡Sabía que dirías que sí! 💖</div>
     <div id="final-message">¡Ya somos novios mi amor! ❤️</div>
+    <div id="countdown">¡Bueno, ahora tu dispositivo explotará en 3 segundos! ⏳</div>
+    <div id="final-words">Mentiras, te quiero mucho ❤️</div>
 
     <script>
         // Obtener elementos del DOM
@@ -141,6 +167,8 @@
         const yesButton = document.getElementById('yes');
         const message = document.getElementById('message');
         const finalMessage = document.getElementById('final-message');
+        const countdown = document.getElementById('countdown');
+        const finalWords = document.getElementById('final-words');
 
         // Al hacer clic en el corazón, mostrar la pregunta
         heart.addEventListener('click', function() {
@@ -156,6 +184,7 @@
             setTimeout(function() {
                 message.style.display = 'none'; // Ocultar el primer mensaje
                 finalMessage.style.display = 'block'; // Mostrar el segundo mensaje
+                startCountdown(); // Iniciar cuenta regresiva
             }, 3000); // Esperar 3 segundos antes de mostrar "Ya somos novios mi amor"
         });
 
@@ -168,10 +197,22 @@
             noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
         });
 
-        // Hacer que al hacer clic en "Salir", el mensaje de "Ya somos novios mi amor" aparezca
-        finalMessage.addEventListener('click', function() {
-            finalMessage.style.display = 'none'; // Ocultar el mensaje actual
-        });
+        // Función de la cuenta regresiva
+        function startCountdown() {
+            countdown.style.display = 'block'; // Mostrar la cuenta regresiva
+
+            let timeLeft = 3;
+            const countdownInterval = setInterval(function() {
+                countdown.textContent = `¡Bueno, ahora tu dispositivo explotará en ${timeLeft} segundos! ⏳`;
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(countdownInterval);
+                    countdown.style.display = 'none'; // Ocultar cuenta regresiva
+                    finalWords.style.display = 'block'; // Mostrar el mensaje final
+                }
+            }, 1000); // Actualizar cada segundo
+        }
     </script>
 </body>
 </html>
