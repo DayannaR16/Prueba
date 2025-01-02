@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>para ti ❤️</title>
+    <title>para ti ❤️ </title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -115,6 +115,18 @@
             left: calc(50px - 50%);
             transform: translateX(50px);
         }
+        #message {
+            display: none;
+            text-align: center;
+            font-size: 2em;
+            color: white;
+            background-color: #28a745;
+            padding: 20px;
+            border-radius: 10px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
     </style>
 </head>
 <body>
@@ -131,11 +143,15 @@
         </div>
     </div>
 
+    <div id="message">Sabía que dirías que si mi amor 💖</div>
+
     <script>
         const introScreen = document.getElementById('intro-screen');
         const questionContainer = document.getElementById('question-container');
         const heart = document.getElementById('heart');
         const noButton = document.getElementById('no-button');
+        const yesButton = document.getElementById('yes');
+        const message = document.getElementById('message');
 
         // Al hacer clic en el corazón, muestra la pregunta
         heart.addEventListener('click', function() {
@@ -151,9 +167,10 @@
             noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
         });
 
-        // Configurar comportamiento del botón "Sí"
-        document.getElementById("yes").addEventListener("click", function() {
-            alert("Sabía que dirías que si mi amor 💖");
+        // Mostrar el mensaje cuando el usuario da clic en "Sí"
+        yesButton.addEventListener('click', function() {
+            message.style.display = 'block'; // Mostrar mensaje de aceptación
+            questionContainer.style.display = 'none'; // Ocultar la pregunta
         });
     </script>
 </body>
