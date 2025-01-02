@@ -3,67 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Quieres ser mi novio/a?</title>
+    <title>¿Quieres ser mi novio?</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f3f3f3;
         }
         .container {
             text-align: center;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
         button {
-            margin: 10px;
+            font-size: 1.2em;
             padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s;
         }
-        #btnSi {
-            background-color: #4CAF50;
+        button:focus {
+            outline: none;
+        }
+        #yes {
+            background-color: #28a745;
             color: white;
         }
-        #btnNo {
-            background-color: #f44336;
+        #yes:hover {
+            background-color: #218838;
+        }
+        #no {
+            background-color: #dc3545;
             color: white;
-            position: relative;
+            position: absolute;
+        }
+        #no:hover {
+            background-color: #c82333;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>¿Quieres ser mi novio?</h1>
+        <div class="buttons">
+            <button id="yes">Sí</button>
+            <button id="no">No</button>
+        </div>
+    </div>
+    <script>
+        const noButton = document.getElementById("no");
+        noButton.addEventListener("mouseenter", () => {
+            const randomX = Math.random() * (window.innerWidth - noButton.offsetWidth);
+            const randomY = Math.random() * (window.innerHeight - noButton.offsetHeight);
+            noButton.style.left = randomX + "px";
+            noButton.style.top = randomY + "px";
+        });
 
-<div class="container">
-    <h2>¿Quieres ser mi novio?</h2>
-    <button id="btnSi">Sí</button>
-    <button id="btnNo">No</button>
-</div>
-
-<script>
-    const btnSi = document.getElementById("btnSi");
-    const btnNo = document.getElementById("btnNo");
-
-    // Mostrar mensaje si se hace clic en "Sí"
-    btnSi.onclick = () => {
-        alert("¡Sabía que dirías que sí! ❤️");
-    };
-
-    // Mover el botón "No" si intentan hacer clic en él
-    btnNo.onmouseover = () => {
-        const randomX = Math.floor(Math.random() * 200) - 100;
-        const randomY = Math.floor(Math.random() * 200) - 100;
-        btnNo.style.transform = `translate(${randomX}px, ${randomY}px)`;
-    };
-</script>
-
+        document.getElementById("yes").addEventListener("click", () => {
+            alert("¡Sabía que dirías que sí! 💖");
+        });
+    </script>
 </body>
 </html>
+
