@@ -14,6 +14,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
         .center {
             text-align: center;
@@ -50,7 +51,11 @@
                 transform: scale(1.2);
             }
         }
-        .question-container {
+        .question-container,
+        .message,
+        .final-message,
+        .countdown,
+        .final-words {
             display: none;
             text-align: center;
             width: 90%;
@@ -61,7 +66,11 @@
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
             position: relative;
         }
-        .question-container h1 {
+        .question-container h1,
+        .message h1,
+        .final-message h1,
+        .countdown h1,
+        .final-words h1 {
             font-size: 2.5em;
             color: black;
         }
@@ -89,54 +98,6 @@
             background-color: #dc3545;
             color: white;
         }
-        #message {
-            display: none;
-            text-align: center;
-            font-size: 2em;
-            color: rgb(255, 0, 0);
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        #final-message {
-            display: none;
-            text-align: center;
-            font-size: 2.5em;
-            color: #fd0707; /* Letra roja */
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        #countdown {
-            display: none;
-            text-align: center;
-            font-size: 2.5em;
-            color: #000;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            position: absolute;
-            top: 70%;
-            transform: translateY(-50%);
-        }
-        #final-words {
-            display: none;
-            text-align: center;
-            font-size: 2.5em;
-            color: #ff0000; /* Letra roja */
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            position: absolute;
-            top: 80%;
-            transform: translateY(-50%);
-        }
     </style>
 </head>
 <body>
@@ -145,7 +106,8 @@
         <div class="heart" id="heart">❤️</div>
         <div class="instruction">(Toca el corazón)</div>
     </div>
-    <div class="question-container" id="question-container">
+
+    <div id="question-container" class="question-container">
         <h1>¿Quieres ser mi novio?</h1>
         <div class="buttons">
             <button id="yes">Sí</button>
@@ -153,10 +115,21 @@
         </div>
     </div>
 
-    <div id="message">¡Sabía que dirías que sí! 💖</div>
-    <div id="final-message">¡Ya somos novios mi amor! ❤️</div>
-    <div id="countdown">¡Bueno, ahora tu dispositivo explotará en 3 segundos! ⏳</div>
-    <div id="final-words">Mentiras, te quiero mucho ❤️</div>
+    <div id="message" class="message">
+        <h1>¡Sabía que dirías que sí! 💖</h1>
+    </div>
+
+    <div id="final-message" class="final-message">
+        <h1>¡Ya somos novios mi amor! ❤️</h1>
+    </div>
+
+    <div id="countdown" class="countdown">
+        <h1>¡Bueno, ahora tu dispositivo explotará en 3 segundos! ⏳</h1>
+    </div>
+
+    <div id="final-words" class="final-words">
+        <h1>Mentiras, te quiero mucho ❤️</h1>
+    </div>
 
     <script>
         // Obtener elementos del DOM
@@ -178,14 +151,14 @@
 
         // Al hacer clic en "Sí", mostrar el mensaje de que dirías que sí y luego el mensaje de novios
         yesButton.addEventListener('click', function() {
-            message.style.display = 'block'; // Mostrar el primer mensaje
             questionContainer.style.display = 'none'; // Ocultar la pregunta
+            message.style.display = 'block'; // Mostrar el primer mensaje
 
             setTimeout(function() {
                 message.style.display = 'none'; // Ocultar el primer mensaje
                 finalMessage.style.display = 'block'; // Mostrar el segundo mensaje
                 startCountdown(); // Iniciar cuenta regresiva
-            }, 3000); // Esperar 3 segundos antes de mostrar "Ya somos novios mi amor"
+            }, 2000); // Esperar 2 segundos antes de mostrar "Ya somos novios mi amor"
         });
 
         // Prevenir que el usuario haga clic en "No" y mover el botón
@@ -199,19 +172,22 @@
 
         // Función de la cuenta regresiva
         function startCountdown() {
-            countdown.style.display = 'block'; // Mostrar la cuenta regresiva
+            setTimeout(function() {
+                finalMessage.style.display = 'none'; // Ocultar mensaje de novios
+                countdown.style.display = 'block'; // Mostrar la cuenta regresiva
 
-            let timeLeft = 3;
-            const countdownInterval = setInterval(function() {
-                countdown.textContent = `¡Bueno, ahora tu dispositivo explotará en ${timeLeft} segundos! ⏳`;
-                timeLeft--;
+                let timeLeft = 3;
+                const countdownInterval = setInterval(function() {
+                    countdown.innerHTML = `¡Bueno, ahora tu dispositivo explotará en ${timeLeft} segundos! ⏳`;
+                    timeLeft--;
 
-                if (timeLeft < 0) {
-                    clearInterval(countdownInterval);
-                    countdown.style.display = 'none'; // Ocultar cuenta regresiva
-                    finalWords.style.display = 'block'; // Mostrar el mensaje final
-                }
-            }, 1000); // Actualizar cada segundo
+                    if (timeLeft < 0) {
+                        clearInterval(countdownInterval);
+                        countdown.style.display = 'none'; // Ocultar cuenta regresiva
+                        finalWords.style.display = 'block'; // Mostrar el mensaje final
+                    }
+                }, 1000); // Actualizar cada segundo
+            }, 2000); // Esperar 2 segundos antes de mostrar la cuenta regresiva
         }
     </script>
 </body>
