@@ -60,7 +60,6 @@
         #no {
             background-color: #dc3545;
             color: white;
-            position: absolute;
         }
         #no:hover {
             background-color: #c82333;
@@ -127,23 +126,24 @@
         const questionContainer = document.getElementById('question-container');
         const noButton = document.getElementById('no');
 
+        // Mostrar la pregunta después de 3 segundos
         setTimeout(() => {
             introCard.style.display = 'none';
             questionContainer.classList.remove('hidden');
         }, 3000);
 
-        noButton.addEventListener('mouseenter', () => {
-            const randomX = Math.random() * (window.innerWidth - noButton.offsetWidth);
-            const randomY = Math.random() * (window.innerHeight - noButton.offsetHeight);
-            noButton.style.left = randomX + 'px';
-            noButton.style.top = randomY + 'px';
+        // Configurar comportamiento del botón "No"
+        noButton.addEventListener('click', () => {
+            let confirmation = false;
+            while (!confirmation) {
+                confirmation = confirm("¿Estás seguro?");
+            }
         });
 
+        // Configurar comportamiento del botón "Sí"
         document.getElementById("yes").addEventListener("click", () => {
             alert("Sabía que dirías que si mi amor 💖");
         });
     </script>
 </body>
 </html>
-
-
